@@ -1,0 +1,21 @@
+import random, time
+
+bytes = [0x8e, 0x2, 0x1e, 0xbd, 0xe9, 0xb6, 0xb1, 0x73, 0x7f, 0xe, 0x2c, 0xfe, 0x8f, 0xda, 0x65, 0x1d, 0x1a, 0x4b, 0x16, 0xb4, 0xc3, 0x14, 0x88, 0x7d, 0xa3, 0x43, 0x43, 0xdc, 0x12, 0x96, 0x17]
+
+now = time.time()
+now = int(now) // 4
+
+while True:
+    random.seed(now)
+    keys = []
+    flag = ""
+    for _ in bytes:
+        keys.append(random.getrandbits(8))
+    
+    for i in range(len(bytes)):
+        flag += chr(keys[i] ^ bytes[i])
+    now -= 1
+    if "nest{" in flag and flag[-1] == "}":
+        print('[+] ENE FLAG BJ MGDGU :', flag)
+
+# Flag : nest{brut3-f0rc1ng_1s_h4rD_eh?}
